@@ -6,13 +6,40 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		4E2475A1756AF981A5F8DCF0 /* Pods_Assistant.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33AB8B5041E3F8CC7E4B5019 /* Pods_Assistant.framework */; };
+		C139B7552D67BC6B00A55377 /* podfile in Resources */ = {isa = PBXBuildFile; fileRef = C139B7542D67BC6B00A55377 /* podfile */; };
+		C139BAA22D67BED600A55377 /* KindeSDK in Frameworks */ = {isa = PBXBuildFile; productRef = C139BAA12D67BED600A55377 /* KindeSDK */; };
+		C139BAA92D67C3E900A55377 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = C139BAA82D67C3E900A55377 /* GoogleSignIn */; };
+		C139BAAB2D67C3E900A55377 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C139BAAA2D67C3E900A55377 /* GoogleSignInSwift */; };
+		C16BE42C2D6A853F0052C606 /* Pow in Frameworks */ = {isa = PBXBuildFile; productRef = C16BE42B2D6A853F0052C606 /* Pow */; };
+		C16BE4312D6B63350052C606 /* UniHaptic in Frameworks */ = {isa = PBXBuildFile; productRef = C16BE4302D6B63350052C606 /* UniHaptic */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
+		0B7464D983C5B474B1367BC1 /* Pods-Assistant.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Assistant.debug.xcconfig"; path = "Target Support Files/Pods-Assistant/Pods-Assistant.debug.xcconfig"; sourceTree = "<group>"; };
+		33AB8B5041E3F8CC7E4B5019 /* Pods_Assistant.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Assistant.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C139B73E2D67BC3600A55377 /* Assistant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Assistant.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C139B7542D67BC6B00A55377 /* podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = podfile; sourceTree = "<group>"; };
+		F15F471B81A7FC0EB68A997B /* Pods-Assistant.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Assistant.release.xcconfig"; path = "Target Support Files/Pods-Assistant/Pods-Assistant.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		C139BAAD2D67CC5300A55377 /* Exceptions for "Assistant" folder in "Assistant" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = C139B73D2D67BC3600A55377 /* Assistant */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		C139B7402D67BC3600A55377 /* Assistant */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				C139BAAD2D67CC5300A55377 /* Exceptions for "Assistant" folder in "Assistant" target */,
+			);
 			path = Assistant;
 			sourceTree = "<group>";
 		};
@@ -23,17 +50,34 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C16BE42C2D6A853F0052C606 /* Pow in Frameworks */,
+				4E2475A1756AF981A5F8DCF0 /* Pods_Assistant.framework in Frameworks */,
+				C139BAA22D67BED600A55377 /* KindeSDK in Frameworks */,
+				C139BAA92D67C3E900A55377 /* GoogleSignIn in Frameworks */,
+				C16BE4312D6B63350052C606 /* UniHaptic in Frameworks */,
+				C139BAAB2D67C3E900A55377 /* GoogleSignInSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C10C6D7772560AAE20636E9A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				33AB8B5041E3F8CC7E4B5019 /* Pods_Assistant.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		C139B7352D67BC3600A55377 = {
 			isa = PBXGroup;
 			children = (
+				C139B7542D67BC6B00A55377 /* podfile */,
 				C139B7402D67BC3600A55377 /* Assistant */,
 				C139B73F2D67BC3600A55377 /* Products */,
+				CA957B56FC1422A8BEB52D8D /* Pods */,
+				C10C6D7772560AAE20636E9A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -45,6 +89,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		CA957B56FC1422A8BEB52D8D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0B7464D983C5B474B1367BC1 /* Pods-Assistant.debug.xcconfig */,
+				F15F471B81A7FC0EB68A997B /* Pods-Assistant.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -52,6 +105,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C139B7512D67BC3800A55377 /* Build configuration list for PBXNativeTarget "Assistant" */;
 			buildPhases = (
+				ACBA44B388DF693D710F1398 /* [CP] Check Pods Manifest.lock */,
 				C139B73A2D67BC3600A55377 /* Sources */,
 				C139B73B2D67BC3600A55377 /* Frameworks */,
 				C139B73C2D67BC3600A55377 /* Resources */,
@@ -64,8 +118,6 @@
 				C139B7402D67BC3600A55377 /* Assistant */,
 			);
 			name = Assistant;
-			packageProductDependencies = (
-			);
 			productName = Assistant;
 			productReference = C139B73E2D67BC3600A55377 /* Assistant.app */;
 			productType = "com.apple.product-type.application";
@@ -94,6 +146,12 @@
 			);
 			mainGroup = C139B7352D67BC3600A55377;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				C139BAA02D67BED600A55377 /* XCRemoteSwiftPackageReference "kinde-sdk-ios" */,
+				C139BAA72D67C3E900A55377 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				C16BE42A2D6A853E0052C606 /* XCRemoteSwiftPackageReference "Pow" */,
+				C16BE42F2D6B63350052C606 /* XCRemoteSwiftPackageReference "UniHaptic" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = C139B73F2D67BC3600A55377 /* Products */;
 			projectDirPath = "";
@@ -109,10 +167,36 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C139B7552D67BC6B00A55377 /* podfile in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		ACBA44B388DF693D710F1398 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Assistant-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		C139B73A2D67BC3600A55377 /* Sources */ = {
@@ -246,18 +330,21 @@
 		};
 		C139B7522D67BC3800A55377 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0B7464D983C5B474B1367BC1 /* Pods-Assistant.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Assistant/Preview Content\"";
 				DEVELOPMENT_TEAM = 4Q398HUTA3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Assistant/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = SplashScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -275,18 +362,21 @@
 		};
 		C139B7532D67BC3800A55377 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F15F471B81A7FC0EB68A997B /* Pods-Assistant.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Assistant/Preview Content\"";
 				DEVELOPMENT_TEAM = 4Q398HUTA3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Assistant/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = SplashScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -324,6 +414,69 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C139BAA02D67BED600A55377 /* XCRemoteSwiftPackageReference "kinde-sdk-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kinde-oss/kinde-sdk-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.4.2;
+			};
+		};
+		C139BAA72D67C3E900A55377 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.0;
+			};
+		};
+		C16BE42A2D6A853E0052C606 /* XCRemoteSwiftPackageReference "Pow" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/EmergeTools/Pow";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.5;
+			};
+		};
+		C16BE42F2D6B63350052C606 /* XCRemoteSwiftPackageReference "UniHaptic" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/fotiDim/UniHaptic";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C139BAA12D67BED600A55377 /* KindeSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C139BAA02D67BED600A55377 /* XCRemoteSwiftPackageReference "kinde-sdk-ios" */;
+			productName = KindeSDK;
+		};
+		C139BAA82D67C3E900A55377 /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C139BAA72D67C3E900A55377 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		C139BAAA2D67C3E900A55377 /* GoogleSignInSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C139BAA72D67C3E900A55377 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignInSwift;
+		};
+		C16BE42B2D6A853F0052C606 /* Pow */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C16BE42A2D6A853E0052C606 /* XCRemoteSwiftPackageReference "Pow" */;
+			productName = Pow;
+		};
+		C16BE4302D6B63350052C606 /* UniHaptic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C16BE42F2D6B63350052C606 /* XCRemoteSwiftPackageReference "UniHaptic" */;
+			productName = UniHaptic;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C139B7362D67BC3600A55377 /* Project object */;
 }

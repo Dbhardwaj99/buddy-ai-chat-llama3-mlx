@@ -1,86 +1,103 @@
 //
 //  ContentView.swift
-//  Assistant
+//  May AI
 //
-//  Created by Divyansh Bhardwaj on 21/02/25.
+//  Created by Divyansh Bhardwaj on 15/02/25.
 //
 
 import SwiftUI
-import CoreData
+import KindeSDK
 
 struct ContentView: View {
-    @Environment(\.managedObjectContext) private var viewContext
+    @State private var isAuthenticated: Bool
+    @State private var user: UserProfile?
+    @State private var presentAlert = false
+    @State private var alertMessage = ""
 
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
-        animation: .default)
-    private var items: FetchedResults<Item>
+    private let logger: Logger?
+
+    init() {
+        self.logger = Logger()
+        
+        // Configure Kinde authentication service
+        KindeSDKAPI.configure(self.logger ?? DefaultLogger())
+        
+        _isAuthenticated = State(initialValue: KindeSDKAPI.auth.isAuthorized())
+    }
 
     var body: some View {
-        NavigationView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
-                    } label: {
-                        Text(item.timestamp!, formatter: itemFormatter)
-                    }
-                }
-                .onDelete(perform: deleteItems)
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
-            }
-            Text("Select an item")
-        }
-    }
-
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        Group {
+            if isAuthenticated {
+                HomeView()
+            } else {
+                LoginView(logger: self.logger, onLoggedIn: onLoggedIn)
+                    .transition(.opacity)
+                    .animation(.easeInOut, value: isAuthenticated)
             }
         }
-    }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            offsets.map { items[$0] }.forEach(viewContext.delete)
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        .onAppear {
+            // Ensure authentication status is updated
+//            Task{
+//                await logout()
+//            }
+            isAuthenticated = KindeSDKAPI.auth.isAuthorized()
+            
+            if isAuthenticated, user == nil {
+                getUserProfile()
             }
+        }
+        .alert(isPresented: $presentAlert) {
+            Alert(
+                title: Text("Error"),
+                message: Text(alertMessage)
+            )
         }
     }
 }
 
-private let itemFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .medium
-    return formatter
-}()
-
 #Preview {
-    ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+    ContentView()
+}
+
+extension ContentView {
+    func onLoggedIn() {
+        isAuthenticated = true
+        getUserProfile()
+    }
+
+    func onLoggedOut() {
+        isAuthenticated = false
+        user = nil
+    }
+
+    private func getUserProfile() {
+        Task {
+            isAuthenticated = await asyncGetUserProfile()
+        }
+    }
+
+    private func asyncGetUserProfile() async -> Bool {
+        do {
+            let userProfile = try await OAuthAPI.getUser()
+            self.user = userProfile
+            let userName = "\(userProfile.givenName ?? "") \(userProfile.familyName ?? "")"
+            self.logger?.info(message: "Got profile for user \(userName)")
+            return true
+        } catch {
+            alertMessage = "Failed to get user profile: \(error.localizedDescription)"
+            self.logger?.error(message: alertMessage)
+            presentAlert = true
+            return false
+        }
+    }
+
+    func logout() async {
+        do {
+            try await KindeSDKAPI.auth.logout()
+            isAuthenticated = false
+            print("Successfully logged out")
+        } catch {
+            print("Logout failed: \(error.localizedDescription)")
+        }
+    }
 }
