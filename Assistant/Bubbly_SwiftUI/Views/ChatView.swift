@@ -66,7 +66,7 @@ public struct ChatView<MessageContent: View, InputViewContent: View>: View {
     @State private var showPopup = false
 
     @StateObject private var viewModel = ChatViewModel()
-    @StateObject private var bubblyviewModel = BubblyViewModel()
+    @StateObject private var bubblyviewModel : BubblyViewModel
     @StateObject private var inputViewModel = InputViewModel()
     @StateObject private var globalFocusState = GlobalFocusState()
     @StateObject private var networkMonitor = NetworkMonitor()
@@ -89,12 +89,14 @@ public struct ChatView<MessageContent: View, InputViewContent: View>: View {
 
     public init(messages: [Message],
                 didSendMessage: @escaping (DraftMessage) -> Void,
-                messageBuilder: @escaping MessageBuilderClosure, showChat: Binding<Bool>) {
+                messageBuilder: @escaping MessageBuilderClosure, showChat: Binding<Bool>,
+                BviewModel: BubblyViewModel) {
         self.didSendMessage = didSendMessage
         self.sections = ChatView.mapMessages(messages)
         self.ids = messages.map { $0.id }
         self.messageBuilder = messageBuilder
         self._showChat = showChat
+        self.bubblyviewModel = viewModel
     }
 
     public var body: some View {
@@ -104,6 +106,7 @@ public struct ChatView<MessageContent: View, InputViewContent: View>: View {
                 .scaledToFill()
                 .ignoresSafeArea()
                 .blur(radius: 10)
+                .opacity(0.3)
             
             VStack {
                 headView

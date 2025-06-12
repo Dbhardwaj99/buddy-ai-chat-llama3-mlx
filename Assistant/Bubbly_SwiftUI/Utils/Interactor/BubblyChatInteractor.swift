@@ -25,6 +25,8 @@ final class BubblyChatInteractor: ChatInteractorProtocol {
     var senders: MockUser?
     private var replyCounter = 0
     
+    private var globalUser: GlobalUser
+    
     private lazy var chatData = MockChatData()
     
     private lazy var chatState = CurrentValueSubject<[MockMessage], Never>([])
@@ -64,8 +66,9 @@ final class BubblyChatInteractor: ChatInteractorProtocol {
         chatData.tim
     }
     
-    init(isActive: Bool = false){
+    init(isActive: Bool = false, gUser: GlobalUser){
         self.isActive = isActive
+        self.globalUser = gUser
         
         chatState.value = PersistenceManager.shared.loadMessages()
     }
