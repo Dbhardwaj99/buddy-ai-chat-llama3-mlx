@@ -7,16 +7,13 @@
 
 import Foundation
 import Combine
+import MLXLMCommon
 
 final class BubblyChatInteractor: ChatInteractorProtocol {
     func makeFirstMessage(){
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
             guard let self = self else { return }
-            let firstMessage = self.chatData.randomMessage(
-                sender: self.BubblyLLM,
-                date: Date()
-            )
-            self.chatState.value.append(firstMessage)
+            
         }
         
         startPolling()
@@ -25,7 +22,7 @@ final class BubblyChatInteractor: ChatInteractorProtocol {
     var senders: MockUser?
     private var replyCounter = 0
     
-    private var globalUser: GlobalUser
+//    private var globalUser: GlobalUser
     
     private lazy var chatData = MockChatData()
     
@@ -66,16 +63,20 @@ final class BubblyChatInteractor: ChatInteractorProtocol {
         chatData.tim
     }
     
-    init(isActive: Bool = false, gUser: GlobalUser){
+//    func deleteChatState(chatStateId: String) {
+//        var user = currentUser
+//        PersistenceManager.shared.deleteChatState(from: &user, chatStateId: chatStateId)
+//        currentUser = user
+//    }
+    
+    init(isActive: Bool = false){
         self.isActive = isActive
-        self.globalUser = gUser
+//        self.globalUser = gUser
         
         chatState.value = PersistenceManager.shared.loadMessages()
     }
     
     func send(draftMessage: DraftMessage, user: MockUser) {
-        print("Draft message Checkpoint: \(draftMessage)\n\n")
-        
         if let id = draftMessage.id {
             if let index = chatState.value.firstIndex(where: { $0.uid == id }) {
                 chatState.value.remove(at: index)
@@ -83,21 +84,15 @@ final class BubblyChatInteractor: ChatInteractorProtocol {
         }
         
         Task {
-            //            var status: Message.Status = .sending
-            //            if Int.random(min: 0, max: 20) == 0 {
-            //                status = .error(draftMessage)
-            //            }
             let message = await draftMessage.toMockMessage(
                 user: currentUser,
                 status: .sent
             )
             
-            print("message CHECKPOINT: \(message)\n\\n")
             DispatchQueue.main.async { [weak self] in
                 self?.chatState.value.append(message)
                 PersistenceManager.shared.saveMessages(self?.chatState.value ?? [])
-//                self?.randomReplyMessage()
-                self?.talkToLLM()
+                self?.talkToLLM(message: message.text)
             }
         }
     }
@@ -143,39 +138,32 @@ final class BubblyChatInteractor: ChatInteractorProtocol {
     }
     
     
-    func talkToLLM() {
-////        guard let requestMessages = requestMessages(),
-////              let encryptedData = BobbleOneWayEncryption().encryptAndSerialize(requestMessages) else {
-////            return
-////        }
-//        guard let requestMessages = requestMessages() else {
-//            return
-//        }
-//
-//        do {
-//            let encryptedData = (
-//                try BobbleOneWayEncryption()
-//                    .encryptAndSerialize(requestMessages)
-//            )!
-//            
-//            let startTime = Date()
-//            requestCount += 1
-//            
-//            NetworkManager.shared.hitLLMRequest(fileData: encryptedData) { [weak self] result in
-//                guard let self = self else { return }
-//                DispatchQueue.main.async {
-//                    let latency = Date().timeIntervalSince(startTime)
-//                    switch result {
-//                    case .success(let responseModel):
-//                        self.handleSuccessResponse(responseModel, latency: latency)
-//                    case .failure(let error):
-//                        self.handleFailureResponse(error,latency: latency)
-//                    }
-//                }
-//            }
-//        } catch {
-//            print("Encryption failed with error: \(error)")
-//        }
+    func talkToLLM(message: String) {
+        Task { @MainActor in
+            let evaluator = LLMEvaluator.shared
+            let thread = Thread()
+            let systemPrompt = "You are Buddy, a concise and friendly assistant. Keep replies short."
+
+            for msg in chatState.value.sorted(by: { $0.createdAt < $1.createdAt }) {
+                let role: Role = msg.sender.isCurrentUser ? .user : .assistant
+                let message = MessageLLM(role: role, content: msg.text, thread: thread)
+                thread.messages.append(message)
+            }
+
+            let replyText = await evaluator.generate(
+                modelName: evaluator.modelConfiguration.name,
+                thread: thread,
+                systemPrompt: systemPrompt
+            )
+
+            let replyMessage = self.chatData.ComposeMessage(
+                sender: self.BubblyLLM,
+                date: Date(),
+                BubblyReply: replyText
+            )
+            self.chatState.value.append(replyMessage)
+            PersistenceManager.shared.saveMessages(self.chatState.value)
+        }
     }
     
     
@@ -240,16 +228,16 @@ final class BubblyChatInteractor: ChatInteractorProtocol {
 }
 
 private extension BubblyChatInteractor {
-    func randomReplyMessage() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
-            guard let self = self else { return }
-            let replyMessage = self.chatData.randomMessage(
-                sender: self.BubblyLLM,
-                date: Date()
-            )
-            self.chatState.value.append(replyMessage)
-        }
-    }
+//    func randomReplyMessage() {
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
+//            guard let self = self else { return }
+//            let replyMessage = self.chatData.randomMessage(
+//                sender: self.BubblyLLM,
+//                date: Date()
+//            )
+//            self.chatState.value.append(replyMessage)
+//        }
+//    }
     
     func updateSendingStatuses() {
         let updated = chatState.value.map {

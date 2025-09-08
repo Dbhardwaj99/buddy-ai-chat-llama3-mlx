@@ -18,11 +18,12 @@ struct ContentView: View {
 
     init() {
         self.logger = Logger()
+        isAuthenticated = true
         
         // Configure Kinde authentication service
-        KindeSDKAPI.configure(self.logger ?? DefaultLogger())
-        
-        _isAuthenticated = State(initialValue: KindeSDKAPI.auth.isAuthorized())
+//        KindeSDKAPI.configure(self.logger ?? DefaultLogger())
+//        
+//        _isAuthenticated = State(initialValue: KindeSDKAPI.auth.isAuthorized())
     }
 
     var body: some View {
@@ -40,11 +41,11 @@ struct ContentView: View {
 //            Task{
 //                await logout()
 //            }
-            isAuthenticated = KindeSDKAPI.auth.isAuthorized()
-            
-            if isAuthenticated, user == nil {
-                getUserProfile()
-            }
+//            isAuthenticated = KindeSDKAPI.auth.isAuthorized()
+//            
+//            if isAuthenticated, user == nil {
+//                getUserProfile()
+//            }
         }
         .alert(isPresented: $presentAlert) {
             Alert(

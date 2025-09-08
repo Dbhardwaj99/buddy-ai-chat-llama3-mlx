@@ -66,7 +66,7 @@ public struct ChatView<MessageContent: View, InputViewContent: View>: View {
     @State private var showPopup = false
 
     @StateObject private var viewModel = ChatViewModel()
-    @StateObject private var bubblyviewModel : BubblyViewModel
+    @StateObject private var bubblyviewModel = BubblyViewModel()
     @StateObject private var inputViewModel = InputViewModel()
     @StateObject private var globalFocusState = GlobalFocusState()
     @StateObject private var networkMonitor = NetworkMonitor()
@@ -87,7 +87,7 @@ public struct ChatView<MessageContent: View, InputViewContent: View>: View {
     @State private var menuCellOpacity: CGFloat = 0
     @State private var menuScrollView: UIScrollView?
 
-    public init(messages: [Message],
+    init(messages: [Message],
                 didSendMessage: @escaping (DraftMessage) -> Void,
                 messageBuilder: @escaping MessageBuilderClosure, showChat: Binding<Bool>,
                 BviewModel: BubblyViewModel) {
@@ -96,7 +96,6 @@ public struct ChatView<MessageContent: View, InputViewContent: View>: View {
         self.ids = messages.map { $0.id }
         self.messageBuilder = messageBuilder
         self._showChat = showChat
-        self.bubblyviewModel = viewModel
     }
 
     public var body: some View {

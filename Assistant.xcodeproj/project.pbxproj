@@ -7,7 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4E2475A1756AF981A5F8DCF0 /* Pods_Assistant.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33AB8B5041E3F8CC7E4B5019 /* Pods_Assistant.framework */; };
+		528C5A6E2E6EC1C300C148DF /* MLX in Frameworks */ = {isa = PBXBuildFile; productRef = 528C5A6D2E6EC1C300C148DF /* MLX */; };
+		528C5A702E6EC1C300C148DF /* MLXFFT in Frameworks */ = {isa = PBXBuildFile; productRef = 528C5A6F2E6EC1C300C148DF /* MLXFFT */; };
+		528C5A722E6EC1C300C148DF /* MLXFast in Frameworks */ = {isa = PBXBuildFile; productRef = 528C5A712E6EC1C300C148DF /* MLXFast */; };
+		528C5A742E6EC1C300C148DF /* MLXLinalg in Frameworks */ = {isa = PBXBuildFile; productRef = 528C5A732E6EC1C300C148DF /* MLXLinalg */; };
+		528C5A762E6EC1C300C148DF /* MLXNN in Frameworks */ = {isa = PBXBuildFile; productRef = 528C5A752E6EC1C300C148DF /* MLXNN */; };
+		528C5AC92E6EC4C000C148DF /* MLXEmbedders in Frameworks */ = {isa = PBXBuildFile; productRef = 528C5AC82E6EC4C000C148DF /* MLXEmbedders */; };
+		528C5ACB2E6EC4C000C148DF /* MLXLLM in Frameworks */ = {isa = PBXBuildFile; productRef = 528C5ACA2E6EC4C000C148DF /* MLXLLM */; };
+		528C5ACD2E6EC4C000C148DF /* MLXLMCommon in Frameworks */ = {isa = PBXBuildFile; productRef = 528C5ACC2E6EC4C000C148DF /* MLXLMCommon */; };
+		528C5ACF2E6EC4C000C148DF /* MLXMNIST in Frameworks */ = {isa = PBXBuildFile; productRef = 528C5ACE2E6EC4C000C148DF /* MLXMNIST */; };
+		528C5AD12E6EC4C000C148DF /* MLXVLM in Frameworks */ = {isa = PBXBuildFile; productRef = 528C5AD02E6EC4C000C148DF /* MLXVLM */; };
 		C139B7552D67BC6B00A55377 /* podfile in Resources */ = {isa = PBXBuildFile; fileRef = C139B7542D67BC6B00A55377 /* podfile */; };
 		C139BAA22D67BED600A55377 /* KindeSDK in Frameworks */ = {isa = PBXBuildFile; productRef = C139BAA12D67BED600A55377 /* KindeSDK */; };
 		C139BAA92D67C3E900A55377 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = C139BAA82D67C3E900A55377 /* GoogleSignIn */; };
@@ -50,12 +59,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				528C5ACF2E6EC4C000C148DF /* MLXMNIST in Frameworks */,
+				528C5ACB2E6EC4C000C148DF /* MLXLLM in Frameworks */,
+				528C5A6E2E6EC1C300C148DF /* MLX in Frameworks */,
 				C16BE42C2D6A853F0052C606 /* Pow in Frameworks */,
-				4E2475A1756AF981A5F8DCF0 /* Pods_Assistant.framework in Frameworks */,
 				C139BAA22D67BED600A55377 /* KindeSDK in Frameworks */,
+				528C5AD12E6EC4C000C148DF /* MLXVLM in Frameworks */,
 				C139BAA92D67C3E900A55377 /* GoogleSignIn in Frameworks */,
+				528C5A702E6EC1C300C148DF /* MLXFFT in Frameworks */,
 				C16BE4312D6B63350052C606 /* UniHaptic in Frameworks */,
+				528C5AC92E6EC4C000C148DF /* MLXEmbedders in Frameworks */,
+				528C5A722E6EC1C300C148DF /* MLXFast in Frameworks */,
+				528C5A742E6EC1C300C148DF /* MLXLinalg in Frameworks */,
+				528C5A762E6EC1C300C148DF /* MLXNN in Frameworks */,
 				C139BAAB2D67C3E900A55377 /* GoogleSignInSwift in Frameworks */,
+				528C5ACD2E6EC4C000C148DF /* MLXLMCommon in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -151,6 +169,8 @@
 				C139BAA72D67C3E900A55377 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 				C16BE42A2D6A853E0052C606 /* XCRemoteSwiftPackageReference "Pow" */,
 				C16BE42F2D6B63350052C606 /* XCRemoteSwiftPackageReference "UniHaptic" */,
+				528C5A6C2E6EC1C300C148DF /* XCRemoteSwiftPackageReference "mlx-swift" */,
+				528C5AC72E6EC4C000C148DF /* XCRemoteSwiftPackageReference "mlx-swift-examples" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = C139B73F2D67BC3600A55377 /* Products */;
@@ -416,6 +436,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		528C5A6C2E6EC1C300C148DF /* XCRemoteSwiftPackageReference "mlx-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ml-explore/mlx-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.25.6;
+			};
+		};
+		528C5AC72E6EC4C000C148DF /* XCRemoteSwiftPackageReference "mlx-swift-examples" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ml-explore/mlx-swift-examples.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.25.7;
+			};
+		};
 		C139BAA02D67BED600A55377 /* XCRemoteSwiftPackageReference "kinde-sdk-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kinde-oss/kinde-sdk-ios.git";
@@ -451,6 +487,56 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		528C5A6D2E6EC1C300C148DF /* MLX */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 528C5A6C2E6EC1C300C148DF /* XCRemoteSwiftPackageReference "mlx-swift" */;
+			productName = MLX;
+		};
+		528C5A6F2E6EC1C300C148DF /* MLXFFT */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 528C5A6C2E6EC1C300C148DF /* XCRemoteSwiftPackageReference "mlx-swift" */;
+			productName = MLXFFT;
+		};
+		528C5A712E6EC1C300C148DF /* MLXFast */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 528C5A6C2E6EC1C300C148DF /* XCRemoteSwiftPackageReference "mlx-swift" */;
+			productName = MLXFast;
+		};
+		528C5A732E6EC1C300C148DF /* MLXLinalg */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 528C5A6C2E6EC1C300C148DF /* XCRemoteSwiftPackageReference "mlx-swift" */;
+			productName = MLXLinalg;
+		};
+		528C5A752E6EC1C300C148DF /* MLXNN */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 528C5A6C2E6EC1C300C148DF /* XCRemoteSwiftPackageReference "mlx-swift" */;
+			productName = MLXNN;
+		};
+		528C5AC82E6EC4C000C148DF /* MLXEmbedders */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 528C5AC72E6EC4C000C148DF /* XCRemoteSwiftPackageReference "mlx-swift-examples" */;
+			productName = MLXEmbedders;
+		};
+		528C5ACA2E6EC4C000C148DF /* MLXLLM */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 528C5AC72E6EC4C000C148DF /* XCRemoteSwiftPackageReference "mlx-swift-examples" */;
+			productName = MLXLLM;
+		};
+		528C5ACC2E6EC4C000C148DF /* MLXLMCommon */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 528C5AC72E6EC4C000C148DF /* XCRemoteSwiftPackageReference "mlx-swift-examples" */;
+			productName = MLXLMCommon;
+		};
+		528C5ACE2E6EC4C000C148DF /* MLXMNIST */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 528C5AC72E6EC4C000C148DF /* XCRemoteSwiftPackageReference "mlx-swift-examples" */;
+			productName = MLXMNIST;
+		};
+		528C5AD02E6EC4C000C148DF /* MLXVLM */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 528C5AC72E6EC4C000C148DF /* XCRemoteSwiftPackageReference "mlx-swift-examples" */;
+			productName = MLXVLM;
+		};
 		C139BAA12D67BED600A55377 /* KindeSDK */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = C139BAA02D67BED600A55377 /* XCRemoteSwiftPackageReference "kinde-sdk-ios" */;

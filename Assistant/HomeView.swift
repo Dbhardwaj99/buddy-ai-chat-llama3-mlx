@@ -12,6 +12,7 @@ struct HomeView: View {
     @State private var showChat: Bool = false
     @State private var showImage: Bool = true
     @State private var wiggleButton: Bool = true
+    @State private var showLLMStatus: Bool = false
     
     var body: some View {
         GeometryReader { geometry in
@@ -152,6 +153,27 @@ struct HomeView: View {
                                     }
                                         .padding(.vertical, 16)
                                 )
+
+                            // LLM Status Card
+                            Rectangle()
+                                .foregroundStyle(Color(hex: "#2E2F6C"))
+                                .frame(maxWidth: .infinity, minHeight: 166)
+                                .cornerRadius(15)
+                                .onTapGesture {
+                                    showLLMStatus = true
+                                }
+                                .overlay(
+                                    VStack(spacing: 10) {
+                                        Image(.waiting)
+                                            .resizable()
+                                            .scaledToFit()
+                                            .frame(width: 66, height: 66)
+                                        Text("Model Status")
+                                            .font(.headline)
+                                            .bold()
+                                            .foregroundStyle(.white)
+                                    }
+                                )
                         }
                         .padding(.horizontal, 16)
                         
@@ -215,10 +237,14 @@ struct HomeView: View {
             }
             .edgesIgnoringSafeArea(.top)
             .onAppear(perform: {
+                showChat = true
                 toggleImageEvery15Seconds()
             })
             .fullScreenCover(isPresented: $showChat) {
                 BubblyView(title: "Hello", showChat: $showChat)
+            }
+            .sheet(isPresented: $showLLMStatus) {
+                LLMStatusView()
             }
         }
     }
